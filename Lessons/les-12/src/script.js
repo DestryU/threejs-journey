@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
+import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 
 /**
  * Base
@@ -16,58 +16,51 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// Axes Helper
+const axesHelper = new THREE.AxesHelper()
+scene.add(axesHelper)
+
 /**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
+
+const matCapText = textureLoader.load('textures/matcaps/gold.png')
+matCapText.colorSpace = THREE.SRGBColorSpace
+
 
 
 
 const fontLoader = new FontLoader()
 
 fontLoader.load(
+    '/fonts/helvetiker_regular.typeface.json',
     (font) => {
-        '/fonts/helvetiker_regular.typeface.json';
-        console.log("Why did it works this time?")
+        
+        const textGeo = new TextGeometry(
+            "Hello Other Worlds",
+            {
+                font,
+                size: 0.5,
+                depth: 0.05,
+                curveSegments: 4,
+                bevelEnabled: true,
+                bevelThickness: 0.02,
+                bevelSize: 0.01,
+                bevelOffset: 0,
+                bevelSegments: 3
+            }
+        )
+
+        textGeo.center()
+
+        const textMaterial = new THREE.MeshMatcapMaterial()
+        textMaterial.matcap = matCapText
+        const text = new THREE.Mesh(textGeo, textMaterial)
+        scene.add(text)
     }
 )
 
-// fontLoader.load(
-//     '/fonts/helvetiker_regular.typeface.json',
-//     (font) =>
-//     {
-//         console.log("Why in the actual fuck?!");
-        
-//         const textGeometry = new TextGeometry(
-//             'Hello Three.js',
-//             {
-//                 font: font,
-//                 size: 0.5,
-//                 depth: 0.2,
-//                 curveSegments: 12,
-//                 bevelEnabled: true,
-//                 bevelThickness: 0.03,
-//                 bevelSize: 0.02,
-//                 bevelOffset: 0,
-//                 bevelSegments: 5
-//             }
-//         )
-//         const textMaterial = new THREE.MeshBasicMaterial()
-//         const text = new THREE.Mesh(textGeometry, textMaterial)
-//         scene.add(text)
-//     }
-// )
-
-
-/**
- * Object
- */
-const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial()
-)
-
-scene.add(cube)
 
 /**
  * Sizes
