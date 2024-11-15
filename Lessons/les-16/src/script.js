@@ -18,22 +18,63 @@ const scene = new THREE.Scene()
 /**
  * House
  */
-// Temporary sphere
-const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 32, 32),
-    new THREE.MeshStandardMaterial({ roughness: 0.7 })
-)
-scene.add(sphere)
-
-
 const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(20, 20),
     new THREE.MeshStandardMaterial()
 )
-
 floor.rotation.x = Math.PI * -0.5
-
 scene.add(floor)
+
+
+// House Group
+
+const house = new THREE.Group()
+scene.add(house)
+
+// - - - - -
+
+const walls = new THREE.Mesh(
+    new THREE.BoxGeometry(4, 2.5, 4),
+    new THREE.MeshStandardMaterial()
+)
+house.add(walls)
+walls.position.y = 1.25
+
+
+const roof = new THREE.Mesh(
+    new THREE.ConeGeometry(3.5, 1.3, 4),
+    new THREE.MeshStandardMaterial()
+)
+house.add(roof)
+roof.rotation.y = Math.PI * .25
+roof.position.y = 2.5 + .65
+
+const door = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1.618),
+    new THREE.MeshStandardMaterial()
+)
+house.add(door)
+door.position.y = 1.628 / 2
+door.position.z = 2.01
+
+
+const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
+const bushMaterial = new THREE.MeshStandardMaterial()
+
+const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush1.scale.set(.5, .5, .5)
+bush1.position.set(.8, .2, 2.4)
+
+const bush2 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush2.scale.set(.3, .3, .3)
+bush2.position.set(.4, .2, 2.75)
+
+const bush3 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush3.scale.set(.6, .6, .6)
+bush3.position.set(-1.3, .2, 2.2)
+
+house.add(bush1, bush2, bush3)
+
 
 
 /**
