@@ -344,6 +344,50 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+
+/* 
+
+    Shadows
+
+*/
+
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
+// Cast and Receive //
+directionalLight.castShadow = true
+ghost1.castShadow = true
+ghost2.castShadow = true
+ghost3.castShadow = true
+
+walls.castShadow = true
+walls.receiveShadow = true
+
+roof.castShadow = true
+
+floor.receiveShadow = true
+
+for(const grave of graves.children){
+    grave.castShadow = true
+    grave.receiveShadow = true
+}
+
+bush1.receiveShadow = true
+bush2.receiveShadow = true
+bush3.receiveShadow = true
+
+// Shadow Mapping //
+
+directionalLight.shadow.mapSize.width = 256
+directionalLight.shadow.mapSize.height = 256
+directionalLight.shadow.camera.top = 8
+directionalLight.shadow.camera.right = 8
+directionalLight.shadow.camera.bottom = - 8
+directionalLight.shadow.camera.left = - 8
+directionalLight.shadow.camera.near = 1
+directionalLight.shadow.camera.far = 20
+
+
 /* 
 
     Global Tick
@@ -376,6 +420,10 @@ const tick = () =>
     ghost3.position.z = Math.sin(ghost3Angle) * 5
     ghost3.position.y = Math.sin(ghost3Angle) * Math.sin(ghost3Angle * 3.34) * Math.sin(ghost3Angle * 3.45)
     
+    // Door Light Intensity //
+
+    doorlight.intensity = (Math.sin(elapsedTime) + 1) * (Math.sin(elapsedTime * 3.14) + 1)
+
 
     // Update controls
     controls.update()
