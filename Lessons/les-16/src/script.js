@@ -1,7 +1,11 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { Sky } from 'three/addons/objects/Sky.js'
 import { Timer } from 'three/addons/misc/Timer.js'
 import GUI from 'lil-gui'
+
+console.log(Sky);
+
 
 /**
  * Base
@@ -387,6 +391,34 @@ directionalLight.shadow.camera.left = - 8
 directionalLight.shadow.camera.near = 1
 directionalLight.shadow.camera.far = 20
 
+ghost1.shadow.mapSize.width = 256
+ghost1.shadow.mapSize.height = 256
+ghost1.shadow.camera.far = 10
+
+ghost2.shadow.mapSize.width = 256
+ghost2.shadow.mapSize.height = 256
+ghost2.shadow.camera.far = 10
+
+ghost3.shadow.mapSize.width = 256
+ghost3.shadow.mapSize.height = 256
+ghost3.shadow.camera.far = 10
+
+
+/* 
+
+    Sky
+
+*/
+
+const sky = new Sky()
+sky.scale.set(100, 100, 100)
+scene.add(sky)
+
+sky.material.uniforms['turbidity'].value = 10
+sky.material.uniforms['rayleigh'].value = 3
+sky.material.uniforms['mieCoefficient'].value = 0.1
+sky.material.uniforms['mieDirectionalG'].value = 0.95
+sky.material.uniforms['sunPosition'].value.set(0.3, -0.038, -0.95)
 
 /* 
 
@@ -408,17 +440,17 @@ const tick = () =>
     const ghost1Angle = elapsedTime * 0.1
     ghost1.position.x = Math.cos(ghost1Angle) * 4
     ghost1.position.z = Math.sin(ghost1Angle) * 4
-    ghost1.position.y = Math.sin(ghost1Angle) * Math.sin(ghost1Angle * 2.34) * Math.sin(ghost1Angle * 3.45)
+    ghost1.position.y = (Math.sin(ghost1Angle) * Math.sin(ghost1Angle * 2.34) * Math.sin(ghost1Angle * 3.45)) + .5
 
     const ghost2Angle = - elapsedTime * 0.25
     ghost2.position.x = Math.cos(ghost2Angle) * 6
     ghost2.position.z = Math.sin(ghost2Angle) * 6
-    ghost2.position.y = Math.sin(ghost2Angle) * Math.sin(ghost2Angle * 2.34) * Math.sin(ghost2Angle * 3.45)
+    ghost2.position.y = (Math.sin(ghost2Angle) * Math.sin(ghost2Angle * 2.34) * Math.sin(ghost2Angle * 3.45)) + .5
 
     const ghost3Angle = elapsedTime * 0.35
     ghost3.position.x = Math.cos(ghost3Angle) * 5
     ghost3.position.z = Math.sin(ghost3Angle) * 5
-    ghost3.position.y = Math.sin(ghost3Angle) * Math.sin(ghost3Angle * 3.34) * Math.sin(ghost3Angle * 3.45)
+    ghost3.position.y = (Math.sin(ghost3Angle) * Math.sin(ghost3Angle * 3.34) * Math.sin(ghost3Angle * 3.45)) + .5
     
     // Door Light Intensity //
 
