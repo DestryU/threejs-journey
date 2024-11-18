@@ -6,13 +6,13 @@ import GUI from 'lil-gui'
 /**
  * Base
  */
-// Debug
+// Debug //
 const gui = new GUI()
 
-// Canvas
+// Canvas //
 const canvas = document.querySelector('canvas.webgl')
 
-// Scene
+// Scene //
 const scene = new THREE.Scene()
 
 /* 
@@ -135,7 +135,7 @@ gui.add(floor.material, 'displacementScale').min(0).max(1).step(.001).name('floo
 gui.add(floor.material, 'displacementBias').min(-1).max(1).step(.001).name('floorbias')
 
 
-// House Group
+// House Group //
 
 const house = new THREE.Group()
 scene.add(house)
@@ -277,11 +277,24 @@ const doorlight = new THREE.PointLight('#ff7d46', 5)
 doorlight.position.set(0, 2.1, 2.5)
 scene.add(doorlight)
 
+/* 
+
+    Ghost Lights
+
+*/
+
+const ghost1 = new THREE.PointLight('#8db9c2', 6)
+const ghost2 = new THREE.PointLight('#8db9c2', 6)
+const ghost3 = new THREE.PointLight('#8db9c2', 6)
+scene.add(ghost1, ghost2, ghost3)
 
 
-/**
- * Sizes
- */
+/* 
+
+    Sizes
+
+*/
+
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
@@ -289,45 +302,54 @@ const sizes = {
 
 window.addEventListener('resize', () =>
 {
-    // Update sizes
+    // Update sizes //
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
 
-    // Update camera
+    // Update camera //
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
 
-    // Update renderer
+    // Update renderer //
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-/**
- * Camera
- */
-// Base camera
+/* 
+
+    Camera
+
+*/
+
+// Base camera //
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 4
 camera.position.y = 2
 camera.position.z = 5
 scene.add(camera)
 
-// Controls
+// Controls //
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
-/**
- * Renderer
- */
+/* 
+
+Renderer
+
+*/
+
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-/**
- * Animate
- */
+/* 
+
+    Global Tick
+
+*/
+
 const timer = new Timer()
 
 const tick = () =>
@@ -336,6 +358,23 @@ const tick = () =>
     timer.update()
     const elapsedTime = timer.getElapsed()
 
+
+    // Ghosts //
+
+    const ghost1Angle = elapsedTime * 0.1
+    ghost1.position.x = Math.cos(ghost1Angle) * 4
+    ghost1.position.z = Math.sin(ghost1Angle) * 4
+    ghost1.position.y = Math.sin(ghost1Angle) * Math.sin(ghost1Angle * 2.34) * Math.sin(ghost1Angle * 3.45)
+
+    const ghost2Angle = - elapsedTime * 0.25
+    ghost2.position.x = Math.cos(ghost2Angle) * 6
+    ghost2.position.z = Math.sin(ghost2Angle) * 6
+    ghost2.position.y = Math.sin(ghost2Angle) * Math.sin(ghost2Angle * 2.34) * Math.sin(ghost2Angle * 3.45)
+
+    const ghost3Angle = elapsedTime * 0.35
+    ghost3.position.x = Math.cos(ghost3Angle) * 5
+    ghost3.position.z = Math.sin(ghost3Angle) * 5
+    ghost3.position.y = Math.sin(ghost3Angle) * Math.sin(ghost3Angle * 3.34) * Math.sin(ghost3Angle * 3.45)
     
 
     // Update controls
