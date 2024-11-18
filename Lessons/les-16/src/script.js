@@ -4,14 +4,13 @@ import { Sky } from 'three/addons/objects/Sky.js'
 import { Timer } from 'three/addons/misc/Timer.js'
 import GUI from 'lil-gui'
 
-console.log(Sky);
 
 
 /**
  * Base
  */
 // Debug //
-const gui = new GUI()
+// const gui = new GUI()
 
 // Canvas //
 const canvas = document.querySelector('canvas.webgl')
@@ -32,10 +31,10 @@ const textLoad = new THREE.TextureLoader()
 // Floor Textures //
 
 const floorAlphaTexture = textLoad.load('./floor/alpha.jpg')
-const floorAlbedoTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_diff_1k.jpg')
-const floorARMTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_arm_1k.jpg')
-const floorNormalTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_nor_gl_1k.jpg')
-const floorDisplacementTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_disp_1k.jpg')
+const floorAlbedoTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_diff_1k.webp')
+const floorARMTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_arm_1k.webp')
+const floorNormalTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_nor_gl_1k.webp')
+const floorDisplacementTexture = textLoad.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_disp_1k.webp')
 
 floorAlbedoTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -55,17 +54,17 @@ floorDisplacementTexture.wrapT = THREE.RepeatWrapping
 
 // Wall Textures //
 
-const wallsAlbedoTexture = textLoad.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_diff_1k.jpg')
-const wallsARMTexture = textLoad.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_arm_1k.jpg')
-const wallsNormalTexture = textLoad.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_nor_gl_1k.jpg')
+const wallsAlbedoTexture = textLoad.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_diff_1k.webp')
+const wallsARMTexture = textLoad.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_arm_1k.webp')
+const wallsNormalTexture = textLoad.load('./wall/castle_brick_broken_06_1k/castle_brick_broken_06_nor_gl_1k.webp')
 
 wallsAlbedoTexture.colorSpace = THREE.SRGBColorSpace
 
 // Roof Textures //
 
-const roofAlbedoTexture = textLoad.load('./roof/roof_slates_02_1k/roof_slates_02_diff_1k.jpg')
-const roofARMTexture = textLoad.load('./roof/roof_slates_02_1k/roof_slates_02_arm_1k.jpg')
-const roofNormalTexture = textLoad.load('./roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.jpg')
+const roofAlbedoTexture = textLoad.load('./roof/roof_slates_02_1k/roof_slates_02_diff_1k.webp')
+const roofARMTexture = textLoad.load('./roof/roof_slates_02_1k/roof_slates_02_arm_1k.webp')
+const roofNormalTexture = textLoad.load('./roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.webp')
 
 roofAlbedoTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -79,17 +78,17 @@ roofNormalTexture.wrapS = THREE.RepeatWrapping
 
 // Bush Textures //
 
-const bushAlbedoTexture = textLoad.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.jpg')
-const bushARMTexture = textLoad.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.jpg')
-const bushNORMALTexture = textLoad.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.jpg')
+const bushAlbedoTexture = textLoad.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.webp')
+const bushARMTexture = textLoad.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.webp')
+const bushNORMALTexture = textLoad.load('./bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.webp')
 
 bushAlbedoTexture.colorSpace = THREE.SRGBColorSpace
 
 // Grave Texures //
 
-const graveAlbedoTexture = textLoad.load('./grave/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.jpg')
-const graveARMTexture = textLoad.load('./grave/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.jpg')
-const graveNormalTexture = textLoad.load('./grave/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.jpg')
+const graveAlbedoTexture = textLoad.load('./grave/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.webp')
+const graveARMTexture = textLoad.load('./grave/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.webp')
+const graveNormalTexture = textLoad.load('./grave/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.webp')
 
 graveAlbedoTexture.repeat.set(0.3, 0.4)
 graveARMTexture.repeat.set(0.3, 0.4)
@@ -99,13 +98,13 @@ graveAlbedoTexture.colorSpace = THREE.SRGBColorSpace
 
 // Door Textures //
 
-const doorAlbedoTexture = textLoad.load('./door/color.jpg')
-const doorAlphaTexture = textLoad.load('./door/alpha.jpg')
-const doorAmbientOcclusionTexture = textLoad.load('./door/ambientOcclusion.jpg')
-const doorHeightTexture = textLoad.load('./door/height.jpg')
-const doorNormalTexture = textLoad.load('./door/normal.jpg')
-const doorMetalnessTexture = textLoad.load('./door/metalness.jpg')
-const doorRoughnessTexture = textLoad.load('./door/roughness.jpg')
+const doorAlbedoTexture = textLoad.load('./door/color.webp')
+const doorAlphaTexture = textLoad.load('./door/alpha.webp')
+const doorAmbientOcclusionTexture = textLoad.load('./door/ambientOcclusion.webp')
+const doorHeightTexture = textLoad.load('./door/height.webp')
+const doorNormalTexture = textLoad.load('./door/normal.webp')
+const doorMetalnessTexture = textLoad.load('./door/metalness.webp')
+const doorRoughnessTexture = textLoad.load('./door/roughness.webp')
 
 doorAlbedoTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -135,8 +134,6 @@ floor.rotation.x = Math.PI * -0.5
 scene.add(floor)
 
 
-gui.add(floor.material, 'displacementScale').min(0).max(1).step(.001).name('floordisplacement')
-gui.add(floor.material, 'displacementBias').min(-1).max(1).step(.001).name('floorbias')
 
 
 // House Group //
