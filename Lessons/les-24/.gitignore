@@ -1,0 +1,34 @@
+# Node modules and dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VSCode config (optional, if you want to keep it personal)
+.vscode/
+
+# Coverage reports
+coverage/
+
+# Storybook junk (if you ever add it)
+.storybook-out/
+
+# Shopify-specific (if storing token files or private script
